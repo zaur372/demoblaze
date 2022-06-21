@@ -1,8 +1,14 @@
 import chai from 'chai';
 import {run, stop} from '../lib/browser';
-import loc from '../locators.json';
-const assert = chai.assert;
 import app from '../framework/pages';
+const assert = chai.assert;
+const deleteProduct = "#tbodyid a";
+const welcome = "#nameofuser";
+const LogIn = "#login2";
+const previousPageButton ="#prev2";
+const placeOrder = "[data-target='#orderModal']";
+const total = "#totalp";
+const nextPageButton = ".pagination li:nth-child(2)";
 
 describe ('Магазин demoblaze', () => {
     let page;
@@ -16,38 +22,38 @@ describe ('Магазин demoblaze', () => {
 
     it('Авторизоваться демо пользователем', async () => {
         await app().Main().login(page, 'demo', 'demo');
-        await page.waitForSelector(loc.welcome);
-        const welcomeText = await page.textContent(loc.welcome);
+        await page.waitForSelector(welcome);
+        const welcomeText = await page.textContent(welcome);
         assert.strictEqual(welcomeText, 'Welcome demo', 'Имя пользователя не равно demo' );
     });
 
     it('Выполнить выход из профиля демо пользователя', async () => {
         await app().Main().login(page, 'demo', 'demo');
         await app().Main().logout(page);
-        await page.waitForSelector(loc.LogIn);
-        const LogInText = await page.textContent(loc.LogIn);
+        await page.waitForSelector(LogIn);
+        const LogInText = await page.textContent(LogIn);
         assert.strictEqual(LogInText, 'Log in', 'Выход не выполнен' );
     });
 
     it('Проверить переход на домашнюю страницу', async () => {
         await app().Main().clickProductIphone(page);
         await app().Main().clickHome(page);
-        await page.waitForSelector(loc.nextPageButton);
-        const nextPageText = await page.textContent(loc.nextPageButton);
+        await page.waitForSelector(nextPageButton);
+        const nextPageText = await page.textContent(nextPageButton);
         assert.strictEqual(nextPageText, 'Next', 'Переход на домашнюю страницу не выполнен' );
     });
 
     it('Проверить переход на следующую страницу товаров', async () => {
         await app().Main().clickButtonNext(page);
-        await page.waitForSelector(loc.previousPageButton);
-        const previousText = await page.textContent(loc.previousPageButton);
+        await page.waitForSelector(previousPageButton);
+        const previousText = await page.textContent(previousPageButton);
         assert.strictEqual(previousText, 'Previous', 'Переход на следующую страницу товаров не выполнен' );
     });
 
     it('Просмотреть корзину', async () => {
         await app().Main().clickCart(page);
-        await page.waitForSelector(loc.placeOrder);
-        const placeOrderText = await page.textContent(loc.placeOrder);
+        await page.waitForSelector(placeOrder);
+        const placeOrderText = await page.textContent(placeOrder);
         assert.strictEqual(placeOrderText, 'Place Order', 'Переход на вкладку Cart не выполнен' );
     });
 
@@ -55,8 +61,8 @@ describe ('Магазин demoblaze', () => {
         await app().Main().clickProductHtc(page);
         await app().Product().clickAdd(page);
         await app().Main().clickCart(page);
-        await page.waitForSelector(loc.total);
-        const totalHtc = await page.textContent(loc.total);
+        await page.waitForSelector(total);
+        const totalHtc = await page.textContent(total);
         assert.strictEqual(totalHtc, '700', 'Цена телефона не равна 700' ); 
     }); 
 
@@ -64,12 +70,12 @@ describe ('Магазин demoblaze', () => {
         await app().Main().clickProductHtc(page);
         await app().Product().clickAdd(page);
         await app().Main().clickCart(page);
-        await page.waitForSelector(loc.total);
-        const totalHtc = await page.textContent(loc.total);
+        await page.waitForSelector(total);
+        const totalHtc = await page.textContent(total);
         assert.strictEqual(totalHtc, '700', 'Цена телефона не равна 700' )
         await app().Cart().clickDelete(page);
-        await page.waitForSelector(loc.delete, { state: 'hidden' });
-        const totalHtc2 = await page.textContent(loc.total);
+        await page.waitForSelector(deleteProduct, { state: 'hidden' });
+        const totalHtc2 = await page.textContent(total);
         assert.notStrictEqual(totalHtc2, '700', 'Цена не изменилась' ) 
     });
 });

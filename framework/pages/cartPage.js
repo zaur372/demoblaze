@@ -1,8 +1,8 @@
-import loc from '../../locators.json';
+const deleteProduct = "#tbodyid a";
 
 const CartPage ={
     clickDelete: async (page) => {
-        await page.click(loc.delete)
+        await page.click(deleteProduct)
     }
 }
 

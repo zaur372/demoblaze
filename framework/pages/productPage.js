@@ -1,8 +1,8 @@
-import loc from '../../locators.json';
+const addToCart = ".btn.btn-success";
 
 const ProductPage ={
     clickAdd: async (page) => {
-        await page.click(loc.addToCart)
+        await page.click(addToCart)
     }
 }
 

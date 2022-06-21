@@ -1,31 +1,40 @@
-import loc from '../../locators.json';
+const usernameField = "#loginusername";
+const passwordField = "#loginpassword";
+const authButton = "#login2";
+const loginButton ="[onclick='logIn()']";
+const logOutButton ="#logout2";
+const home = "#nava";
+const nextPageButton = ".pagination li:nth-child(2)";
+const cart = "#cartur";
+const iphone = ".card >[href='prod.html?idp_=5']";
+const htc = "[src='imgs/HTC_M9.jpg']";
 
 const MainPage ={
     login: async (page, username, password) => {
-        await page.click(loc.authButton);
-        await page.click(loc.usernameField); 
-        await page.fill(loc.usernameField, username);
-        await page.click(loc.passwordField);
-        await page.fill(loc.passwordField, password);
-        await page.click(loc.loginButton);
+        await page.click(authButton);
+        await page.click(usernameField); 
+        await page.fill(usernameField, username);
+        await page.click(passwordField);
+        await page.fill(passwordField, password);
+        await page.click(loginButton);
     },
     logout: async (page) => {
-        await page.click(loc.logOutButton);
+        await page.click(logOutButton);
     },
     clickButtonNext: async (page) => {
-        await page.click(loc.nextPageButton);
+        await page.click(nextPageButton);
     },
     clickProductIphone: async (page) => {
-        await page.click(loc.iphone)
+        await page.click(iphone)
     },
     clickProductHtc: async (page) => {
-        await page.click(loc.htc)
+        await page.click(htc)
     },
     clickHome: async (page) => {
-        await page.click(loc.home);
+        await page.click(home);
     },
     clickCart: async (page) => {
-        await page.click(loc.cart);
+        await page.click(cart);
     }
 }
 
