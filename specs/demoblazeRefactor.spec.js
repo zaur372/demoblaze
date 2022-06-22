@@ -3,12 +3,7 @@ import {run, stop} from '../lib/browser';
 import app from '../framework/pages';
 const assert = chai.assert;
 const deleteProduct = "#tbodyid a";
-const welcome = "#nameofuser";
-const LogIn = "#login2";
-const previousPageButton ="#prev2";
-const placeOrder = "[data-target='#orderModal']";
 const total = "#totalp";
-const nextPageButton = ".pagination li:nth-child(2)";
 
 describe ('Магазин demoblaze', () => {
     let page;
@@ -22,38 +17,33 @@ describe ('Магазин demoblaze', () => {
 
     it('Авторизоваться демо пользователем', async () => {
         await app().Main().login(page, 'demo', 'demo');
-        await page.waitForSelector(welcome);
-        const welcomeText = await page.textContent(welcome);
+        const welcomeText = await app().AllElements().getWelcome(page);
         assert.strictEqual(welcomeText, 'Welcome demo', 'Имя пользователя не равно demo' );
     });
 
     it('Выполнить выход из профиля демо пользователя', async () => {
         await app().Main().login(page, 'demo', 'demo');
         await app().Main().logout(page);
-        await page.waitForSelector(LogIn);
-        const LogInText = await page.textContent(LogIn);
+        const LogInText = await app().AllElements().getLogIn(page);
         assert.strictEqual(LogInText, 'Log in', 'Выход не выполнен' );
     });
 
     it('Проверить переход на домашнюю страницу', async () => {
         await app().Main().clickProductIphone(page);
         await app().Main().clickHome(page);
-        await page.waitForSelector(nextPageButton);
-        const nextPageText = await page.textContent(nextPageButton);
+        const nextPageText = await app().AllElements().getNext(page);
         assert.strictEqual(nextPageText, 'Next', 'Переход на домашнюю страницу не выполнен' );
     });
 
     it('Проверить переход на следующую страницу товаров', async () => {
         await app().Main().clickButtonNext(page);
-        await page.waitForSelector(previousPageButton);
-        const previousText = await page.textContent(previousPageButton);
+        const previousText = await app().AllElements().getPrevious(page);
         assert.strictEqual(previousText, 'Previous', 'Переход на следующую страницу товаров не выполнен' );
     });
 
     it('Просмотреть корзину', async () => {
         await app().Main().clickCart(page);
-        await page.waitForSelector(placeOrder);
-        const placeOrderText = await page.textContent(placeOrder);
+        const placeOrderText = await app().AllElements().getOrder(page);
         assert.strictEqual(placeOrderText, 'Place Order', 'Переход на вкладку Cart не выполнен' );
     });
 

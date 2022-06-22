@@ -1,4 +1,4 @@
-import chai from 'chai';
+/* import chai from 'chai';
 import {run, stop} from '../lib/browser';
 import loc from '../locators.json';
 const assert = chai.assert;
@@ -81,4 +81,4 @@ describe ('Магазин demoblaze', () => {
         const totalHtc2 = await page.textContent(loc.total);
         assert.notStrictEqual(totalHtc2, '700', 'Цена не изменилась' ) 
     });
-});
+}); */
