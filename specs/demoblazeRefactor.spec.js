@@ -2,8 +2,6 @@ import chai from 'chai';
 import {run, stop} from '../lib/browser';
 import app from '../framework/pages';
 const assert = chai.assert;
-const deleteProduct = "#tbodyid a";
-const total = "#totalp";
 
 describe ('Магазин demoblaze', () => {
     let page;
@@ -51,8 +49,7 @@ describe ('Магазин demoblaze', () => {
         await app().Main().clickProductHtc(page);
         await app().Product().clickAdd(page);
         await app().Main().clickCart(page);
-        await page.waitForSelector(total);
-        const totalHtc = await page.textContent(total);
+        const totalHtc = await app().AllElements().getTotal(page);
         assert.strictEqual(totalHtc, '700', 'Цена телефона не равна 700' ); 
     }); 
 
@@ -60,12 +57,10 @@ describe ('Магазин demoblaze', () => {
         await app().Main().clickProductHtc(page);
         await app().Product().clickAdd(page);
         await app().Main().clickCart(page);
-        await page.waitForSelector(total);
-        const totalHtc = await page.textContent(total);
+        const totalHtc = await app().AllElements().getTotal(page);
         assert.strictEqual(totalHtc, '700', 'Цена телефона не равна 700' )
         await app().Cart().clickDelete(page);
-        await page.waitForSelector(deleteProduct, { state: 'hidden' });
-        const totalHtc2 = await page.textContent(total);
+        const totalHtc2 = await app().AllElements().getTotalHtc(page);
         assert.notStrictEqual(totalHtc2, '700', 'Цена не изменилась' ) 
     });
 });
