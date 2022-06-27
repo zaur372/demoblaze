@@ -1,0 +1,20 @@
+{
+     "usernameField" : "#loginusername",
+     "passwordField" : "#loginpassword",
+     "authButton" : "#login2",
+     "loginButton" : "[onclick='logIn()']",
+     "welcome" : "#nameofuser",
+     "logOutButton" : "#logout2",
+     "LogIn" : "#login2",
+     "home" : "#nava",
+     "nextPageButton" : ".pagination li:nth-child(2)",
+     "previousPageButton" : "#prev2",
+     "cart" : "#cartur",
+     "placeOrder" : "[data-target='#orderModal']",
+     "slider" : ".carousel.slide",
+     "iphone" : ".card >[href='prod.html?idp_=5']",
+     "htc" : "[src='imgs/HTC_M9.jpg']",
+     "addToCart" : ".btn.btn-success",
+     "total" : "#totalp",
+     "delete" : "#tbodyid a"
+}
